@@ -7,10 +7,8 @@ function App() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [mode, setMode] = useState('sd');
   const [scrolled, setScrolled] = useState(false);
 
-  // Navbar collapse on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -26,15 +24,15 @@ function App() {
     setImage(null);
 
     try {
-      const response = await axios.post('http://localhost:8000/generate', {
+      const response = await axios.post('https://headway-retinal-junior.ngrok-free.dev/generate', {
         prompt,
-        mode,
+        mode: 'sd',
         num_steps: 20,
         guidance: 7.5
       });
       setImage(response.data.image);
     } catch (err) {
-      setError('Backend not connected. Start Colab first.');
+      setError('Something went wrong. Please try again.');
     }
     setLoading(false);
   };
@@ -44,15 +42,15 @@ function App() {
 
       {/* ── NAVBAR ── */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-  <div className="nav-logo">VisionForge</div>
-  {!scrolled && (
-   <div className="nav-links">
-  <a onClick={(e) => { e.preventDefault(); document.getElementById('about').scrollIntoView({ behavior: 'smooth' }); }}>About</a>
-  <a onClick={(e) => { e.preventDefault(); document.getElementById('features').scrollIntoView({ behavior: 'smooth' }); }}>Features</a>
-  <a onClick={(e) => { e.preventDefault(); document.getElementById('generate').scrollIntoView({ behavior: 'smooth' }); }}>Generate</a>
-</div>
-  )}
-</nav>
+        <div className="nav-logo">VisionForge</div>
+        {!scrolled && (
+          <div className="nav-links">
+            <a onClick={(e) => { e.preventDefault(); document.getElementById('about').scrollIntoView({ behavior: 'smooth' }); }}>About</a>
+            <a onClick={(e) => { e.preventDefault(); document.getElementById('features').scrollIntoView({ behavior: 'smooth' }); }}>Features</a>
+            <a onClick={(e) => { e.preventDefault(); document.getElementById('generate').scrollIntoView({ behavior: 'smooth' }); }}>Generate</a>
+          </div>
+        )}
+      </nav>
 
       {/* ── HERO ── */}
       <section className="hero">
@@ -73,7 +71,7 @@ function App() {
             <span>✓ CGAN + Attention</span>
             <span>✓ CLIP Text Encoder</span>
           </div>
-        <a onClick={(e) => { e.preventDefault(); document.getElementById('generate').scrollIntoView({ behavior: 'smooth' }); }} className="hero-cta">Start Generating →</a>
+          <a onClick={(e) => { e.preventDefault(); document.getElementById('generate').scrollIntoView({ behavior: 'smooth' }); }} className="hero-cta">Start Generating →</a>
         </div>
       </section>
 
@@ -86,10 +84,9 @@ function App() {
         </h2>
         <p className="section-sub">
           VisionForge combines two state-of-the-art AI pipelines into a single web application.
-          Switch between photorealistic generation and research-grade GAN outputs — all from your browser.
+          Generate stunning domain-specific images from simple text descriptions.
         </p>
 
-        {/* Mac Terminal Window */}
         <div className="terminal">
           <div className="terminal-header">
             <span className="dot red" />
@@ -112,9 +109,9 @@ function App() {
             <p className="t-gray">  Condition  : CLIP text embeddings (512-dim)</p>
             <p className="t-gray">  Generator  : 4x4 → 8x8 → 16x16 → 32x32 → 64x64</p>
             <p className="t-gray">  Dataset    : Oxford-102 Flowers (102 classes)</p>
-            <p className="t-gray">  Output     : 64x64 PNG</p>
+            <p className="t-gray">  Status     : Under NDA</p>
             <br />
-            <p><span className="t-blue">✓</span> <span className="t-white">Both pipelines ready. Server running on port 8000.</span></p>
+            <p><span className="t-blue">✓</span> <span className="t-white">Pipeline ready. Server running on port 8000.</span></p>
           </div>
         </div>
       </section>
@@ -133,35 +130,30 @@ function App() {
             <h3>Stable Diffusion + LoRA</h3>
             <p>Pre-trained SD 1.5 fine-tuned with domain-specific LoRA weights. Generates photorealistic, high quality images in 5 seconds on GPU.</p>
           </div>
-
           <div className="glass-card">
             <div className="card-icon">🧠</div>
             <h3>CGAN + Self Attention</h3>
             <p>Custom Conditional GAN built from scratch in PyTorch. Generator and Discriminator enhanced with self-attention layers for better spatial understanding.</p>
           </div>
-
           <div className="glass-card">
             <div className="card-icon">📝</div>
             <h3>CLIP Text Encoder</h3>
             <p>OpenAI CLIP encodes your text prompt into a 512-dimensional vector. Both models use this shared encoder for consistent text understanding.</p>
           </div>
-
           <div className="glass-card">
             <div className="card-icon">🌸</div>
             <h3>Oxford-102 Dataset</h3>
             <p>102 flower classes analyzed and visualized. Class distribution, image resolution stats, and sample grids explored for domain understanding.</p>
           </div>
-
           <div className="glass-card">
             <div className="card-icon">⚡</div>
             <h3>FastAPI Backend</h3>
             <p>High performance Python REST API serving both models. Models loaded once on startup for instant inference. CORS enabled for seamless frontend integration.</p>
           </div>
-
           <div className="glass-card">
             <div className="card-icon">🖥️</div>
             <h3>React Frontend</h3>
-            <p>Modern single-page application with real-time image generation, mode switching, and responsive design. Built with React 18 and Axios.</p>
+            <p>Modern single-page application with real-time image generation and responsive design. Built with React 18 and Axios.</p>
           </div>
         </div>
       </section>
@@ -174,23 +166,6 @@ function App() {
           <span className="highlight-italic">we'll paint it</span>
         </h2>
 
-        {/* Mode Toggle */}
-        <div className="mode-toggle">
-          <button
-            className={mode === 'sd' ? 'active' : ''}
-            onClick={() => setMode('sd')}
-          >
-            🎨 Stable Diffusion + LoRA
-          </button>
-          <button
-            className={mode === 'cgan' ? 'active' : ''}
-            onClick={() => setMode('cgan')}
-          >
-            🧠 CGAN + Attention
-          </button>
-        </div>
-
-        {/* Input */}
         <div className="input-section">
           <input
             type="text"
@@ -208,7 +183,7 @@ function App() {
         {loading && (
           <div className="loading-box">
             <div className="spinner" />
-            <p>Creating your image using {mode === 'sd' ? 'Stable Diffusion + LoRA' : 'CGAN + Attention'}...</p>
+            <p>Creating your image, please wait...</p>
           </div>
         )}
 
@@ -216,16 +191,15 @@ function App() {
           <div className="image-result">
             <img src={`data:image/png;base64,${image}`} alt="Generated" />
             <p className="caption">"{prompt}"</p>
-            <p className="model-tag">Generated with {mode === 'sd' ? 'Stable Diffusion + LoRA' : 'CGAN + Attention'}</p>
           </div>
         )}
       </section>
 
       {/* ── FOOTER ── */}
       <footer className="footer">
-  <p>© 2026 VisionForge. All rights reserved.</p>
-  <p>Turn your words into stunning visuals</p>
-</footer>
+        <p>© 2026 VisionForge. All rights reserved.</p>
+        <p>Turn words into stunning visuals</p>
+      </footer>
 
     </div>
   );
