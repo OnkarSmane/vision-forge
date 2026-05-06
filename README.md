@@ -1,74 +1,56 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# 🌸 VisionForge — Text to Image Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack Generative AI web application that generates images from text prompts using Stable Diffusion + LoRA and a custom CGAN with attention layers.
 
-## Available Scripts
+## 🚀 Features
+- Text to image generation using Stable Diffusion 1.5 + LoRA
+- Custom CGAN with self-attention and cross-attention layers
+- CLIP text encoder for prompt understanding
+- Oxford-102 Flowers dataset analysis
+- FastAPI backend + React frontend
 
-In the project directory, you can run:
+## 🛠️ Tech Stack
+- **Frontend:** React 18, Tailwind CSS, Axios
+- **Backend:** FastAPI, Python
+- **ML Models:** Stable Diffusion 1.5, LoRA, PyTorch CGAN
+- **Text Encoder:** OpenAI CLIP
+- **Dataset:** Oxford-102 Flowers
 
-### `npm start`
+## 📁 Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+vision-forge/
+backend/
+models/
+sd_lora.py        # Stable Diffusion + LoRA
+cgan.py           # Custom CGAN with attention
+text_encoder.py   # CLIP text encoder
+utils/
+image_utils.py    # Image processing
+main.py             # FastAPI server
+frontend/
+src/
+App.js            # Main React app
+App.css           # Styles
+notebooks/
+01_dataset_eda.py   # Oxford-102 EDA
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ How to Run
 
-### `npm test`
+### Backend (Google Colab)
+1. Open Colab with T4 GPU
+2. Run the startup cell in the notebook
+3. Copy the ngrok URL
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend (Local)
+```bash
+cd vision-forge-frontend
+npm install
+npm start
+```
 
-### `npm run build`
+## 📊 Dataset
+Oxford-102 Flowers — 102 classes, 8189 images
+[Google Drive Link](#)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# vision-forge
->>>>>>> 1c326c41eabda3b21bd80de29ae27e9bc17a97fd
+## 👨‍💻 Built by
+Onkar Mane — SVKM's NMIMS 2026
